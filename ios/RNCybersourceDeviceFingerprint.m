@@ -49,7 +49,7 @@ RCT_EXPORT_METHOD(
 }
 
 RCT_EXPORT_METHOD(
-                  getSessionID:(NSArray *)attributes
+                  getSessionID:(NSString *)fingerprintKey attributes:(NSArray *)attributes
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject
                   ) {

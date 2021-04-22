@@ -60,7 +60,7 @@ public class RNCybersourceDeviceFingerprintModule extends ReactContextBaseJavaMo
     }
 
     @ReactMethod
-    public void getSessionID(final ReadableArray attributes, final Promise promise) {
+    public void getSessionID(final String fingerprintKey, final ReadableArray attributes, final Promise promise) {
         if (_defender == null) {
             promise.reject(CYBERSOURCE_SDK, "CyberSource SDK is not yet initialised");
             return;
@@ -69,6 +69,7 @@ public class RNCybersourceDeviceFingerprintModule extends ReactContextBaseJavaMo
         List<String> list = new ArrayList<>();
 
         int leni = attributes.size();
+
         for (int i = 0; i < leni; ++i) {
             String value = attributes.getString(i);
             if (value != null) {
@@ -76,7 +77,8 @@ public class RNCybersourceDeviceFingerprintModule extends ReactContextBaseJavaMo
             }
         }
 
-        TMXProfilingOptions options = new TMXProfilingOptions().setCustomAttributes(list);
+        TMXProfilingOptions options = new TMXProfilingOptions().setCustomAttributes(null);
+        options.setSessionID(fingerprintKey);
         TMXProfiling.getInstance().profile(options, new CompletionNotifier(promise));
     }
 
